@@ -37,7 +37,7 @@ function Main() {
               outline-none focus:border-blue-500 dark:focus:border-blue-500 placeholder-gray-300 placeholder-opacity-0 transition duration-200'
               onChange={(e) => setRoom(e.target.value)}
               onKeyPress={(event) => {
-                event.key === "Enter" &&  setShowChat(true);
+                event.key === "Enter" &&  joinRoom();
             }}  />
               <span className='text-xl text-black dark:text-white text-opacity-60 bg-white dark:bg-neutral-800 absolute left-5 top-0.5 px-1 
               transition duration-200 input-text dark:text-opacity-60'>Room Id</span>

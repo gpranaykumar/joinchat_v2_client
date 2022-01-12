@@ -1,10 +1,19 @@
 import React,{ useEffect, useState } from 'react'
 import ScrollToBottom from "react-scroll-to-bottom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 function Chat({ socket, username, room }) {
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
     const [users, setUsers] = useState([]);
+    const [copyBtn,setCopyBtn] = useState(false)
 
+    useEffect(() => {
+        if(copyBtn){
+          setTimeout(() => {
+            setCopyBtn(false)
+          }, 3000)
+        }
+      },[copyBtn])
     const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -81,6 +90,7 @@ function Chat({ socket, username, room }) {
                              <h3 className=''><span className='px-2 text-red-500'>&#x25CF;</span>
                              Live Chat
                              </h3>
+                             {copyBtn && <h3 className='bg-green-500 px-2 rounded'>copied</h3>}
                              <a href='/' className='mr-1 hover:text-red-400  px-4 hover:bg-white rounded rounded-xl bg-red-400 text-white'>
                                  Leave Room
                              </a>
@@ -104,6 +114,14 @@ function Chat({ socket, username, room }) {
                                                 text-slate-300 dark:text-gray-400'>
                                                     <p id="time " className=''>{messageContent.time}</p>
                                                     <p id="author" className='px-2'>{messageContent.author}</p>
+                                                    <CopyToClipboard text={messageContent.message}>
+                                                    <button onClick={() => {setCopyBtn(true)}} className='hover:text-white'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                                            <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                                        </svg>
+                                                    </button>
+                                                    </CopyToClipboard>
                                                 </div>
                                             </div>
                                             </div>
@@ -211,6 +229,7 @@ function Chat({ socket, username, room }) {
                              <h3 className=''><span className='px-2 text-red-500'>&#x25CF;</span>
                              Live Chat
                              </h3>
+                             {copyBtn && <h3 className='bg-green-500 px-2 rounded'>copied</h3>}
                              <a href='/' className=' hover:text-red-400 mr-1  px-4 hover:bg-white rounded rounded-xl bg-red-400 text-white'>
                                  Leave Room
                              </a>
@@ -237,6 +256,14 @@ function Chat({ socket, username, room }) {
                                                 text-slate-300 dark:text-gray-400'>
                                                     <p id="time " className=''>{messageContent.time}</p>
                                                     <p id="author" className='px-2'>{messageContent.author}</p>
+                                                    <CopyToClipboard text={messageContent.message}>
+                                                    <button onClick={() => {setCopyBtn(true)}} className='hover:text-white'>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                                            <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                                        </svg>
+                                                    </button>
+                                                    </CopyToClipboard>
                                                 </div>
                                             </div>
                                             </div>
